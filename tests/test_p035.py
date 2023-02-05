@@ -1,7 +1,7 @@
 import unittest
 
-import p035
-from utils import sieve_of_eratosthenes
+from ..problems import p035
+from ..problems.utils import sieve_of_eratosthenes
 
 
 class TestP036(unittest.TestCase):

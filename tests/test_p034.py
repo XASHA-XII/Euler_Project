@@ -1,6 +1,6 @@
 import unittest
-import math
-import p034
+
+from ..problems import p034
 
 class TestP034(unittest.TestCase):
     def test_is_curious(self):

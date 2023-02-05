@@ -1,6 +1,6 @@
 import unittest
-import p033
-from p033 import Fractions
+from ..problems import p033
+from ..problems.p033 import Fractions
 
 
 class TestFractions(unittest.TestCase):

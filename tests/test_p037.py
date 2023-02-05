@@ -1,5 +1,6 @@
 import unittest
-import p037
+
+from ..problems import p037
 
 class TestP037(unittest.TestCase):
     def test_truncate_list(self):

@@ -1,5 +1,5 @@
 import unittest
-import p003
+from ..problems import p003
 
 
 class TestP0032(unittest.TestCase):
