@@ -10,11 +10,11 @@ HexagonaL:      H(n)=n(2n-1)
 '''
 
 
-
 def hexagonal(n: int) -> int:
     '''Returns the n-th hexagonal number.'''
     H_n = n * (2*n - 1)
     return H_n
+
 
 def is_pentagonal(x: int) -> int:
     '''
