@@ -32,10 +32,11 @@ def main() -> None:
     horizontally, vertically, left diagonal or right diagonal'''
     DIM = 20
     CONSECUTIVE = 4
+
     GRID_PREPROCESSED = GRID.replace('\n', ' ').split(" ")
     GRID_PREPROCESSED = [int(x) for x in GRID_PREPROCESSED]
-    result = -1
 
+    result = -1
     for l in range(DIM):
         horizontal = max(reduce(
             lambda x, y: x*y, GRID_PREPROCESSED[k+l*DIM:l*DIM+k+CONSECUTIVE]) for k in range(DIM-CONSECUTIVE+1))
