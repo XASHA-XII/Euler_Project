@@ -27,14 +27,14 @@ def is_amicable(n: int) -> bool:
 
 def sum_of_divisors(n: int) -> int:
     '''Returns the sum of all proper divisors of a positive integer. In the formula 1 is added 
-    because we skip one in the summation. Furthermore, we have to add sqrt(n) if n is a perfect square.'''
+    because we skip one in the summation. Furthermore, we have to subtract sqrt(n) if n is a perfect square.'''
     if n == 1:
         return 1
     else:
         LIMIT = isqrt(n)
-        result = sum(k + n//k for k in range(2, LIMIT) if n % k == 0) + 1
+        result = sum(k + n//k for k in range(2, LIMIT+1) if n % k == 0) + 1
         if LIMIT**2 == n:
-            result += LIMIT
+            result -= LIMIT
 
         return result
 
