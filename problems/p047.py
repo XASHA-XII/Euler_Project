@@ -1,4 +1,5 @@
 from typing import List
+
 from utils import sieve_of_eratosthenes
 
 
