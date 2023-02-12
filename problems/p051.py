@@ -58,7 +58,6 @@ def cached_is_prime(p: int) -> bool:
     Returns:
         bool: The primality of p.
     """
-    ''''''
     return is_prime(p)
 
 
