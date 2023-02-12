@@ -1,4 +1,5 @@
 import math
+import functools
 from typing import List
 
 
@@ -54,6 +55,23 @@ def is_prime(n: int) -> bool:
             return False
     return True
 
+@functools.cache
+def is_prime_cached(n: int) -> bool:
+    '''
+    Returns whether a number is prime or not
+    Parameters:
+        n (int) number
+    Returns:
+        boolean: primness of the number
+    '''
+    assert isinstance(n, int)
+    if n <= 1:
+        return False
+    LIMIT = int(math.sqrt(n))+1
+    for k in range(2, LIMIT):
+        if n % k == 0:
+            return False
+    return True
 
 def sieve_of_eratosthenes(n: int) -> List[int]:
     '''
