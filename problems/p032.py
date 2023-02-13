@@ -6,12 +6,12 @@ Pandigital products
 '''
 
 
-def main() -> None:
+def main() -> int:
     """Returns the sum of all numbers that has dividers that form a pandigital string.
 
 
     Returns:
-        _type_: The sum of all pandigital products.
+        int: The sum of all pandigital products.
     """
     LIMIT = int(math.sqrt(987654321))+1
     result = sum(n for n in range(1, LIMIT) if is_pandigital_product(n))
@@ -19,7 +19,7 @@ def main() -> None:
 
 
 def is_pandigital_product(n: int) -> bool:
-    """Checks if a number is a pandigital product, i.e. are a permutation of987654321. For example, 39*186=7254.
+    """Checks if a number is a pandigital product, i.e. are a permutation of 987654321. For example, 39*186=7254.
 
     Args:
         n (int): integer
