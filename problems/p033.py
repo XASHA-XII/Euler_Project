@@ -40,6 +40,13 @@ class Fractions(object):
         product.reduce()
         return product
 
+    def __add__(self,other):
+        num= self.num*other.denom + other.num*self.denom
+        denom=self.denom*other.denom
+        result=Fractions(num,denom)
+        result.reduce()
+        return result
+
 
 def filter_values(tuple: Tuple) -> bool:
     '''Filters the trivial examples e.g. 10/30 and 11/22'''

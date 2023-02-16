@@ -6,6 +6,7 @@ https://projecteuler.net/problem=53
 Combinatoric selections
 '''
 
+
 def main() -> int:
     """Returns the number of binomial coefficients (n,r) for 1 <= n <= 100 that exceed 10**6.
 
