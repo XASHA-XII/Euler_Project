@@ -11,7 +11,16 @@ from utils import sieve_of_eratosthenes
 from utils import is_prime_probabilistic
 
 
-def has_prime_concats(primes: List[int], p: int):
+def has_prime_concats(primes: List[int], p: int) -> bool:
+    """Given list of primes P and another prime p checks if the concatenations of P and p are prime.
+
+    Args:
+        primes (List[int]): List of primes
+        p (int): primes
+
+    Returns:
+        bool: primality of concatenations
+    """
     for q in primes:
         if not is_prime_probabilistic(int(f'{q}{p}')):
             return False
@@ -20,30 +29,9 @@ def has_prime_concats(primes: List[int], p: int):
     return True
 
 
-
-
-def main()->None:
-    """Two variants to solve the problem. The nested loops version is much more efficient.
-    """
-
-    start= time.time()
-    result = variant_1()
-    end = time.time()
-    print(f"Result {result} after {end-start} seconds with main.")
-
-
-    start= time.time()
-    result = variant_2()
-    end = time.time()
-    print(f"Result {result} after {end-start} seconds with main_alternative.")
-
-
-
-
-
-def variant_1()->int:
+def variant_1() -> int:
     """Returns the minimal sum of primes satisfying the property in https://projecteuler.net/problem=60. 
-    Uses the 5 nested loops function find_minimal_sequence.
+    Uses the 5 nested loops function find_minimal_prime_sum_loops.
 
     Returns:
         int: Minimal sum of primes.
@@ -58,29 +46,27 @@ def variant_1()->int:
             return result
 
 
-def variant_2():
+def variant_2() -> int:
     """Returns the minimal sum of primes satisfying the property in https://projecteuler.net/problem=60. 
-    Uses the functional approach find_minimal_sequence.
+    Uses the functional approach find_minimal_prime_sum_functional.
 
     Returns:
-        _type_: _description_
+        int: Minimal sum of primes
     """
-    SEQ_LEN=5
-    for k in itertools.count(0,10_000):
-        primes = sorted(list(sieve_of_eratosthenes(k)-{2,5}))
+    SEQ_LEN = 5
+    for k in itertools.count(0, 10_000):
+        primes = sorted(list(sieve_of_eratosthenes(k)-{2, 5}))
         print(k)
-        new_limit=k
-        result=k
+        new_limit = k
+        result = k
         while new_limit is not None:
-            new_limit=find_minimal_prime_sum_functional([],new_limit-1,primes,SEQ_LEN)
+            new_limit = find_minimal_prime_sum_functional(
+                [], new_limit-1, primes, SEQ_LEN)
             if new_limit is not None:
-                result=new_limit
-        if result<k:
+                result = new_limit
+        if result < k:
             break
     return result
-
-
-
 
 
 def find_minimal_prime_sum_loops(limit: int) -> int:
@@ -126,13 +112,26 @@ def find_minimal_prime_sum_loops(limit: int) -> int:
     return limit
 
 
-def find_minimal_prime_sum_functional(index, limit, primes,seq_len):
+def find_minimal_prime_sum_functional(index: List[int], limit: int, primes: List[int], seq_len: List[int]) -> int:
+    """Functional approach to finding a sequence of primes satisfying the given condition. If none exists
+    whose sum is smaller than the limit, it returns None.
+
+    Args:
+        index (List[int]): Tndices of the found primes in a list of primes.
+        limit (int): The sum shouldn't exceed this limit.
+        primes (List[int]): A prepocessed list of prime numbers of some length
+        seq_len (List[int]): The length the sequence of primes should have. In our case five.
+
+    Returns:
+        int: First sum it finds or none.
+    """
+
     current_length = len(index)
     if len(index) == seq_len:
         return sum(primes[i] for i in index)
     else:
 
-        start = index[-1] + 1 if (current_length >0) else 0 
+        start = index[-1] + 1 if (current_length > 0) else 0
         end = len(primes)
         current_sequence = [primes[i] for i in index]
         for k in range(start, end):
@@ -143,23 +142,27 @@ def find_minimal_prime_sum_functional(index, limit, primes,seq_len):
                 continue
             else:
                 index.append(k)
-                next_sequence = find_minimal_prime_sum_functional(index, limit-current_prime,primes,seq_len)
+                next_sequence = find_minimal_prime_sum_functional(
+                    index, limit-current_prime, primes, seq_len)
 
                 if next_sequence is not None:
                     return next_sequence
 
                 index.pop()
 
-  
         return None
 
 
-                
-
-
-
-
-
 if __name__ == '__main__':
-    main()
+    """Two variants to solve the problem. The nested loops version is much more efficient.
+    """
 
+    start = time.time()
+    result = variant_1()
+    end = time.time()
+    print(f"Result {result} after {end-start} seconds with main.")
+
+    start = time.time()
+    result = variant_2()
+    end = time.time()
+    print(f"Result {result} after {end-start} seconds with main_alternative.")
